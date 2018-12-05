@@ -1,0 +1,46 @@
+﻿@using MyEvernote.Entities.ViewModels
+
+@model LoginViewModel
+
+@{
+    ViewBag.Title = "MyNote - Login Page";
+}
+
+<link href="~/Content/login-register.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("Login", "Home", FormMethod.Post))
+{
+    <div class="container">
+        <div class="wrapper">
+            <div class="form-signin">
+                <h3 class="form-signin-heading">Welcome! Please Sign In</h3>
+                <hr class="colorgraph"><br>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @if (ViewBag.SentCode != null)
+                {
+                      <a href="/Home/Index" class="btn btn-danger">Sent Activation Link</a>
+                }
+
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+                    @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "User Name",})
+                    @Html.ValidationMessageFor(model=> model.Username,"",new {@class ="text-danger" })
+                    @*<input type="text" class="form-control" name="Username" placeholder="User Name" required="" autofocus="" />*@
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password",
+                    type="password"})
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="Submit">Sign In</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,80 @@
+﻿@using MyEvernote.Entities
+@model IEnumerable<ECategory>
+
+@{
+    ViewBag.Title = "Category";
+}
+
+<div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+
+        <p>
+            <a href="/Category/Create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New</a>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedUser)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedUser)
+                    </td>
+                    <td>
+                        <a href="/Category/Edit/@item.Id" class="btn btn-warning btn-xs" title="Edit">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a href="/Category/Details/@item.Id" class="btn btn-info btn-xs" title="Detail">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
+                        <a href="/Category/Delete/@item.Id" 
+                           onclick="return confirm('Are you sure you want to delete the category?')" 
+                           class="btn btn-danger btn-xs" title="Delete">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>

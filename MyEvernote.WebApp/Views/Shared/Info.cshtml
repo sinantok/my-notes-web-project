@@ -1,0 +1,45 @@
+﻿@using MyEvernote.Entities.ViewModels
+@model InfoViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<link href="~/Content/login-register.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="wrapper">
+        <div class="form-signin">
+            <h3 class="form-signin-heading">@Model.Header...</h3>
+            <hr class="colorgraph"><br>
+
+            <div class="text-info">
+                <h3><span class="glyphicon glyphicon-info-sign"></span>&nbsp;&nbsp;&nbsp;@Model.Title</h3>
+                <hr />
+                <p class="text-justify">
+                    @foreach (string msj in Model.Items)
+                    {
+                        @msj <br />
+                    }
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@{
+    string js = string.Empty;
+    if (Model.IsRedirecting)
+    {
+        js = " setTimeout(function () { window.location = '" + Model.RedirectingUrl + "';" +
+                    " }, " + Model.RedirectingTimeOut + ");";
+    }
+}
+
+<script>
+    $(function () {
+        @Html.Raw(js);
+    });
+</script>
+

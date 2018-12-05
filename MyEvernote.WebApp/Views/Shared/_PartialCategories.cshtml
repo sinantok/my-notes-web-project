@@ -1,0 +1,24 @@
+﻿@using MyEvernote.WebApp.Models
+@using MyEvernote.Entities
+
+@*@model CategoryManager*@
+    
+@{ 
+    List<ECategory> List = CacheManager.GetCategoriesFromCache();
+}
+
+<p class="lead">Kategoriler</p>
+<div class="list-group">
+    <a href="/Home/Index" class="list-group-item">Tümü</a>
+
+    @foreach (ECategory cat in List)
+    {
+        <a href="/Home/ByCategory/@cat.Id" title="@cat.Description" class="list-group-item">@cat.Title</a>
+    }
+
+    @*@foreach (var cat in Model.eCategory)
+        {
+            <a href="#" class="list-group-item">Category 1</a>
+        }*@
+
+</div>

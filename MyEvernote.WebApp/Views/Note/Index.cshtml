@@ -1,0 +1,93 @@
+﻿@using MyEvernote.Entities
+@using MyEvernote.WebApp.Models
+@model IEnumerable<ENote>
+
+@{
+    ViewBag.Title = "My Notes";
+}
+
+<div class="row">
+
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <p>
+            <a href="/Note/Create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New</a>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Text)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsDraft)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LikeCount)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Text)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDraft)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LikeCount)
+                    </td>
+                    <td width="150">
+
+                        <button type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#modal_comment" data-note-id="@item.Id">
+                            <span class="glyphicon glyphicon-comment" title="Comments"></span>
+                        </button>
+                        @if (item.Owner.Id == SessionManager.User.Id)
+                        {
+                            <a href="/Note/Edit/@item.Id" class="btn btn-warning btn-xs" title="Edit">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                        }
+                        <a href="/Note/Details/@item.Id" class="btn btn-info btn-xs" title="Details">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
+                        @if(SessionManager.User.IsAdmin == true || item.Owner.Id == SessionManager.User.Id)
+                        {
+                            <a href="/Note/Delete/@item.Id"
+                                onclick="return confirm('Are you sure you want to delete the note??')"
+                                class="btn btn-danger btn-xs" title="Delete">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        } 
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+
+
+@Bootstrap.ModalPopup(id: "modal_comment", title: "Comments")
+
+<script src="~/Scripts/comment.js"></script>

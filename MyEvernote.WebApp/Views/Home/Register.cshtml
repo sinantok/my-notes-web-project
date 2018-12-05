@@ -1,0 +1,53 @@
+﻿@using MyEvernote.Entities.ViewModels
+
+@model RegisterViewModel
+
+@{
+    ViewBag.Title = "MyNote - Register Page";
+}
+
+<link href="~/Content/login-register.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+    <div class="container">
+        <div class="wrapper">
+            <div class="form-signin">
+                <h3 class="form-signin-heading">Kayıt Formu</h3>
+                <hr class="colorgraph"><br>
+                @Html.ValidationSummary(true,"",new {@class = "text-danger"})
+
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+                    @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "User Name" })
+                    @Html.ValidationMessageFor(model=> model.Username,"",new {@class ="text-danger" })
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></span>
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "E-Mail Address" })
+                    @Html.ValidationMessageFor(model=> model.Email,"",new {@class ="text-danger" })
+                </div>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password",
+                    type="password"})
+                    @Html.ValidationMessageFor(model=> model.Password,"",new {@class ="text-danger" })
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></span>
+                    @Html.TextBoxFor(model => model.RePassword, new { @class = "form-control", placeholder = "Re-Password",
+                    type = "password"})
+                    @Html.ValidationMessageFor(model=> model.RePassword,"",new {@class ="text-danger" })
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-lg btn-primary btn-block" type="Submit">Register</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

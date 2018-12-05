@@ -1,0 +1,112 @@
+﻿@using MyEvernote.Entities
+@model IEnumerable<EUser>
+
+@{
+    ViewBag.Title = "Users";
+}
+
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+        <h2>@ViewBag.Title</h2>
+        <hr />
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-10 col-md-offset-1">
+
+        <p>
+            <a href="/User/Create" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> New</a>
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Surname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsActive)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsAdmin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedOn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedUser)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActive)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsAdmin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedOn)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedUser)
+                    </td>
+                    <td>
+                        <a href="/User/Edit/@item.Id" class="btn btn-warning btn-xs" title="Edit">
+                            <span class="glyphicon glyphicon-edit"></span>
+                        </a>
+                        <a href="/User/Details/@item.Id" class="btn btn-info btn-xs" title="Detail">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </a>
+                        <a href="/User/Delete/@item.Id"
+                           onclick="return confirm('Are you sure want to delete this user?')"
+                           class="btn btn-danger btn-xs" title="Delete">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+    </div>
+
+</div>
+
+
+

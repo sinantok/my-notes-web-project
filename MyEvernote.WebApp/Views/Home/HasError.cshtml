@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "An error occurred";
+}
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+
+        @{ 
+            Exception ex = null;
+            if (TempData["LastError"] != null)
+            {
+                ex = TempData["LastError"] as Exception;
+            }
+        }
+
+        <h1>
+            <span class="glyphicon glyphicon-remove"></span>
+            An error occurred
+        </h1>
+        <p>
+            Please contact the site administrator.
+            <br /><br /><br />
+            @if (ex != null)
+            {
+                <strong>Error Detail : </strong>
+                @ex.Message
+                <br /><br /><br />
+            }
+            <a href="/Home/Index" class="btn btn-primary">Go to Homepage</a>
+            <a href="mailto:sinantok@outlook.com" class="btn btn-primary">Send an E-Mail</a>
+        </p>
+
+    </div>
+</div>
+<br /><br />
+<br /><br />
+<br /><br />
+<br /><br />
+<br /><br />
